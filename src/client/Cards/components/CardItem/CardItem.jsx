@@ -2,9 +2,16 @@ import PropTypes from 'prop-types';
 
 import styles from './CardItem.module.scss'
 
-function CardItem({ id, name, username, onClick, phone, website, email, address, company, onDrop, onDragStart, onDragOver, draggable }) {
+function CardItem({ id, name, username, onClick, phone, website, email, address, company, onDragLeave, onDrop, onDragStart,onDragEnd, onDragOver, draggable }) {
     return (
-        <li className={styles.card} onClick={() => onClick(id)} draggable={draggable} onDrop={(e)=>onDrop(e)} onDragStart={(e) => onDragStart(e)} onDragOver={(e) => onDragOver(e)}>
+        <li className={styles.card} onClick={() => onClick(id)}
+            draggable={draggable}
+            onDragOver={(e) => onDragOver(e)}
+            onDragLeave={(e) => onDragLeave(e)}
+            onDragStart={(e) => onDragStart(e)}
+            onDragEnd={(e) => onDragEnd(e)} 
+            onDrop={(e) => onDrop(e)}
+            >
             <h3 className={styles.cardName}>{ name}</h3>
             <p className={styles.cardUserName}> username: {username}</p>
             <p>phone: {phone}</p>

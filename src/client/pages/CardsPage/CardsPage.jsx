@@ -33,13 +33,13 @@ function CardsPage() {
         {id:2, title: 'cards-auth', items: []}
     ]);
 
-    // console.log(boards);
+    console.log(boards);
 
     const [currentBoard, setCurrentBoard] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
 
     // console.log(currentItem);
-    // console.log(currentBoard);
+    console.log(currentBoard);
 
     const dragOverHandler = (e) => {
         e.preventDefault()
@@ -86,6 +86,7 @@ function CardsPage() {
 
 
     function dropCardHandler(e, board) {
+        // e.preventDefault()
         board.items.push(currentItem)
         const currentIndex = currentBoard.items.indexOf(currentItem)
         currentBoard.items.splice(currentIndex, 1)
@@ -102,33 +103,30 @@ function CardsPage() {
 
     useEffect(() => {
         setBoards(prev => {
-            const qqq = [...prev]
-            qqq[0].items = userCards
-            return qqq
+            const newItems = [...prev]
+            newItems[0].items = userCards
+            return newItems
     })
     }, [userCards])
     
-    // const dropHandler = (e, board, item) => {
-    //     console.log(item);
-        
-    // }
     
     return (
         <>
             <section className={`${styles.container} ${styles.cardPageContainer}`}>
                 <div className={styles.wrapper} >
-                    {boards.map(board => <div key={v4()} className={styles.wrapperCard}>
+                    {boards.map(board => <div key={v4()} className={styles.wrapperCard}
+                        onDragOver={(e) => dragOverHandler(e)}
+                        onDrop={(e) => dropCardHandler(e, board)}>
                         <h3>{board.title}</h3>
-                        <ul onDrop={(e) => dropCardHandler(e, board)}>
+                        <ul >
                             {board.items.map(item =>
                                 <CardItem key={v4()} onClick={toggleModal} {...item}
-                                    draggable={true}
-                                    onDrop={(e) => dropHandler(e, board, item)}
                                     onDragOver={(e) => dragOverHandler(e)}
-                                    // onDragLeave={(e) => dragLeaveHandler(e)}
+                                    onDragLeave={(e) => dragLeaveHandler(e)}
                                     onDragStart={(e) => dragStartHandler(e, board, item)}
-                                    // onDragEnd={(e) => dragEndHandler(e)}
-                                    
+                                    onDragEnd={(e) => dragEndHandler(e)}
+                                    onDrop={(e) => dropHandler(e, board, item)}
+                                    draggable={true}
                                 />)}
                         </ul>
                     </div>)}
