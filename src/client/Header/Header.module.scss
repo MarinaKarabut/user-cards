@@ -1,0 +1,16 @@
+@import "../../shared/styles/base";
+@import "../../shared/styles/common";
+
+.header {
+  // position: fixed;
+  // z-index: 100;
+  width: 100%;
+  box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}

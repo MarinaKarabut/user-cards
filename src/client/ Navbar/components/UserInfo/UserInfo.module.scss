@@ -1,0 +1,19 @@
+.userInfoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name {
+  font-weight: 600;
+  margin-right: 20px;
+}
+
+.avatar {
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.btnLogOut {
+  cursor: pointer;
+}
