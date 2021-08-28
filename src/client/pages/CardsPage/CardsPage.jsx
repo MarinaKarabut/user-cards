@@ -5,7 +5,7 @@ import {v4} from 'uuid'
 import Modal from '../../../shared/components/Modal'
 import UserCardModal from '../../Cards/components/UserCardModal'
 import CardItem from '../../Cards/components/CardItem'
-import { fetchAllTasks } from '../../../redux/users/users-operations'
+import { fetchAllTasks, getCards, add } from '../../../redux/cards/cards-operations'
 
 import styles from './CardsPage.module.scss'
 
@@ -19,44 +19,39 @@ function CardsPage() {
     };
 
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
         dispatch(fetchAllTasks())
+        dispatch(getCards());
     }, [dispatch])
 
-    
-    
-    const userCards = useSelector(state => state.users.cards, shallowEqual)
+    const userCards = useSelector(state => state.cards.cards, shallowEqual)
+
+    const newUserCards = useSelector(state => state.cards.userCards, shallowEqual)
+
+    const cards = userCards.filter(card => newUserCards.findIndex(item => item.name === card.name) === -1)
 
     const [boards, setBoards] = useState([
-        {id:1, title: 'cards', items: userCards},
-        {id:2, title: 'cards-auth', items: []}
+        {id:1, title: "cards", items: [...cards]},
+        {id:2, title: "registered user's cards", items: [...newUserCards]}
     ]);
-
-    console.log(boards);
 
     const [currentBoard, setCurrentBoard] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
 
-    // console.log(currentItem);
-    console.log(currentBoard);
 
     const dragOverHandler = (e) => {
         e.preventDefault()
-        
     }
     
     const dragLeaveHandler = (e) => {
         
     }
 
-    function dragStartHandler(e, board, item) {
-        // console.log(item);
-        // console.log(board);
-        // console.log(e);
+    function dragStartHandler(e, board, item,id) {
         setCurrentBoard(board)
         setCurrentItem(item)
-        
+        setId(id)
     }
 
     const dragEndHandler = (e) => {
@@ -64,12 +59,8 @@ function CardsPage() {
     }
 
     function dropHandler(e, board, item) {
-        console.log(e);
-        console.log(item);
-        console.log(board.items.indexOf(item));
         e.preventDefault()
         const currentIndex = currentBoard.items.indexOf(currentItem)
-        console.log(currentBoard);
         currentBoard.items.splice(currentIndex, 1)
         const dropIndex = board.items.indexOf(item)
         board.items.splice(dropIndex + 1, 0, currentItem)
@@ -86,29 +77,36 @@ function CardsPage() {
 
 
     function dropCardHandler(e, board) {
-        // e.preventDefault()
-        board.items.push(currentItem)
-        const currentIndex = currentBoard.items.indexOf(currentItem)
-        currentBoard.items.splice(currentIndex, 1)
-        setBoards(boards.map(b => {
-            if (b.id === board.id) {
-                return board
+        const currentId = board.items.map(item => item.id)
+        if (!currentId.includes(currentItem.id)) {
+            board.items.push(currentItem)
+            const currentIndex = currentBoard.items.indexOf(currentItem)
+            currentBoard.items.splice(currentIndex, 1)
+            setBoards(boards.map(b => {
+                if (b.id === board.id) {
+                    return board
             }
             if (b.id === currentBoard.id) {
-                return currentBoard
+               return currentBoard
             }
             return b
-        }))
+         }))
+      }
     }
 
+    // useEffect(() => {
+    //     setBoards(prev => {
+    //         const newItems = [...prev]
+    //         newItems[0].items = [...cards]
+    //         return newItems
+    // })
+    // }, [cards])
+
+   
     useEffect(() => {
-        setBoards(prev => {
-            const newItems = [...prev]
-            newItems[0].items = userCards
-            return newItems
-    })
-    }, [userCards])
-    
+        dispatch(add(currentItem))
+    }, [dispatch,currentItem])
+
     
     return (
         <>
@@ -117,13 +115,13 @@ function CardsPage() {
                     {boards.map(board => <div key={v4()} className={styles.wrapperCard}
                         onDragOver={(e) => dragOverHandler(e)}
                         onDrop={(e) => dropCardHandler(e, board)}>
-                        <h3>{board.title}</h3>
+                        <h3 className={styles.title}>{board.title}</h3>
                         <ul >
                             {board.items.map(item =>
                                 <CardItem key={v4()} onClick={toggleModal} {...item}
                                     onDragOver={(e) => dragOverHandler(e)}
                                     onDragLeave={(e) => dragLeaveHandler(e)}
-                                    onDragStart={(e) => dragStartHandler(e, board, item)}
+                                    onDragStart={(e) => dragStartHandler(e, board, item, item._id)}
                                     onDragEnd={(e) => dragEndHandler(e)}
                                     onDrop={(e) => dropHandler(e, board, item)}
                                     draggable={true}

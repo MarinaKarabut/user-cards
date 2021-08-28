@@ -1,12 +1,10 @@
-@import "src/shared/styles/base";
+@import 'src/shared/styles/base';
 
 .logo {
   text-decoration: none;
   @include flex(center, center);
-  margin-bottom: 10px;
   @include tablet {
     @include flex(flex-start, center);
-    margin-bottom: 0;
   }
 }
 

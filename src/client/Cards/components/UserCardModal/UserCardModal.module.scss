@@ -1,7 +1,27 @@
+@import 'src/shared/styles/base';
+@import 'src/shared/styles/common';
+
 .userModalCard {
-  width: 780px;
+  width: 260px;
   padding: 30px;
+  @include tablet {
+    width: 580px;
+  }
+  @include desktop {
+    width: 780px;
+  }
   &Item {
-    margin-bottom: 30px;
+    font-size: 10px;
+    line-height: 1.2;
+    text-align: start;
+    margin-bottom: 20px;
+    @include tablet {
+      font-size: 14px;
+      line-height: 1.21;
+      margin-bottom: 30px;
+    }
+  }
+  &Title {
+    margin-bottom: 10px;
   }
 }

@@ -8,6 +8,7 @@ import { routes } from './routes';
 import PublicPage from './PublicRoute';
 import PrivetPage from './PrivetRoute';
 import { getCurrentUser } from '../redux/auth/auth-operations';
+import { fetchAllTasks, getCards } from '../redux/cards/cards-operations';
 
 const AuthPage = lazy(() => import('../client/pages/AuthPage'));
 const CardsPage = lazy(() => import('../client/pages/CardsPage'));
@@ -17,6 +18,8 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCurrentUser());
+    dispatch(getCards());
+    dispatch(fetchAllTasks());
   }, [dispatch]);
 
   const { auth, cards } = routes;

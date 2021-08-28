@@ -1,13 +1,48 @@
+@import 'src/shared/styles/base';
+@import 'src/shared/styles/common';
+
 .card {
-  width: 480px;
+  width: 230px;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 20px;
   box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.1);
-  margin-left: 50px;
   cursor: pointer;
-  &Name {
+  transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    background: #ffbc33;
+    color: #ffffff;
   }
-  &UserName {
+  &:focus {
+    background: #ffbc33;
+    color: #ffffff;
+  }
+  @include tablet {
+    width: 480px;
+    padding: 30px;
+  }
+  &Name {
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: start;
+    margin-bottom: 20px;
+    @include tablet {
+      font-size: 16px;
+      line-height: 1.21;
+      margin-bottom: 30px;
+    }
+  }
+  .cardInfo {
+    font-size: 10px;
+    line-height: 1.2;
+    text-align: start;
+    margin-bottom: 20px;
+    font-style: normal;
+    @include tablet {
+      font-size: 14px;
+      line-height: 1.21;
+      margin-bottom: 30px;
+    }
   }
 }

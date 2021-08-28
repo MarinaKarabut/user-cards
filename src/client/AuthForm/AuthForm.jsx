@@ -36,18 +36,18 @@ const AuthForm = () => {
   return (
     <>
       <div className={styles.authFormContainer}>
-                <div className={styles.formGroup}>
+        <div className={styles.formGroup}>
           <form onSubmit={handleSubmit}>
             <Input {...fields.email} value={data.email} onChange={handleChange} />
-                        <Input {...fields.password} value={data.password} onChange={handleChange}/>
-                        <div className={styles.buttonContainer}>
-                             <Button className={styles.button} type="submit" onClick={() => setActionType('login')}>Sign in</Button>
-                             <Button className={styles.button} type="submit" onClick={() => setActionType('register')}>Sign up</Button>
-                        </div>
-                  </form>
-                </div>
+            <Input {...fields.password} value={data.password} onChange={handleChange}/>
+            <div className={styles.buttonContainer}>
+              <Button className={styles.button} type="submit" onClick={() => setActionType('login')}>Sign in</Button>
+              <Button className={styles.button} type="submit" onClick={() => setActionType('register')}>Sign up</Button>
             </div>
- <ToastContainer />
+          </form>
+        </div>
+      </div>
+      <ToastContainer />
  </>
   );
 };

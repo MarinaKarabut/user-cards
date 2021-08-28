@@ -1,37 +1,28 @@
-@import "src/shared/styles/base";
+@import 'src/shared/styles/base';
 
 .input {
-  width: 280px;
-  height: 42px;
-  background: #f6f7fb;
-  border-color: transparent;
-  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.15);
+  width: 240px;
+  height: 56px;
+  background: #ffffff;
+  border: 1px solid #ced2d1;
   font-size: 14px;
-  line-height: 1.2;
-  letter-spacing: 0.04em;
+  line-height: 1.21;
+  letter-spacing: 0.02em;
   color: #000000;
   outline: none;
-  margin-top: 10px;
-  margin-bottom: 23px;
-  padding-left: 10px;
+  padding-left: 25px;
   &::placeholder {
-    color: #555555;
+    color: #bbbbbb;
   }
 
   @include tablet {
-    width: 320px;
+    width: 425px;
   }
 }
 
-.label {
-  font-size: 12px;
-  line-height: 1.25;
-  letter-spacing: 0.04em;
-  color: #555555;
-  text-transform: capitalize;
-}
-
 .formGroup {
-  @include flex(flex-start, flex-start);
-  flex-direction: column;
+  margin-bottom: 20px;
+  @include tablet {
+    margin-bottom: 24px;
+  }
 }
