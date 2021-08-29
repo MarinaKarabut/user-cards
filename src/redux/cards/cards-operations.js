@@ -44,7 +44,6 @@ export const add = body => async dispatch => {
   dispatch(addCardRequest());
   try {
     const data = await cardsService.addCard(body);
-    console.log(data);
     dispatch(addCardSuccess(data));
   } catch (error) {
     dispatch(addCardError(error));

@@ -19,8 +19,11 @@
 }
 
 .cardPageContainer {
-  padding-top: 60px;
+  padding-top: 80px;
   padding-bottom: 50px;
+  @include tablet {
+    padding-top: 120px;
+  }
 }
 
 .title {

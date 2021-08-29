@@ -6,20 +6,22 @@ import defaultAvatar from '../../../../images/avatar.jpg'
 
 import styles from './UserInfo.module.scss'
 
-function UserInfo() {
+function UserInfo({ info }) {
+    const {avatar, name} = info
 
-    const name = 'guest'
-    const avatar = defaultAvatar
+    const nameUser = name? name : 'guest'
+    const avatarUser = avatar? avatar : defaultAvatar
 
     const dispatch = useDispatch()
+    
     const onLogout = () => {
         dispatch(logOut())
     }
 
     return (
          <div className={ styles.userInfoWrapper}>
-            <img src={avatar} alt=""  className={ styles.avatar}/>
-            <span className={styles.name}>Welcome, {name}</span>
+            <img src={avatarUser} alt=""  className={ styles.avatar}/>
+            <span className={styles.name}>Welcome, {nameUser}</span>
             <LogOut className={styles.btnLogOut} onClick={onLogout}/>
         </div>
     )

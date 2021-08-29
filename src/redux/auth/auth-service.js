@@ -39,6 +39,16 @@ class AuthService extends BaseHttpService {
       throw error;
     }
   }
+
+  async loginGoogle(body) {
+    try {
+      const { data } = await this.post('auth/googlelogin', body);
+      this.saveToken(data.token);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default AuthService;

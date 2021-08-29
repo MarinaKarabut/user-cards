@@ -1,20 +1,26 @@
-import { createAction } from "@reduxjs/toolkit"
+import { createAction } from '@reduxjs/toolkit';
 
-export const registerRequest = createAction("auth/registerRequest")
-export const registerSuccess = createAction("auth/registerSuccess")
-export const registerError = createAction("auth/registerError")
+export const registerRequest = createAction('auth/registerRequest');
+export const registerSuccess = createAction('auth/registerSuccess');
+export const registerError = createAction('auth/registerError');
 
-export const loginRequest = createAction("auth/loginRequest")
-export const loginSuccess = createAction("auth/loginSuccess")
-export const loginError = createAction("auth/loginError")
+export const loginRequest = createAction('auth/loginRequest');
+export const loginSuccess = createAction('auth/loginSuccess');
+export const loginError = createAction('auth/loginError');
 
-export const logoutRequest = createAction("auth/logoutRequest")
-export const logoutSuccess = createAction("auth/logoutSuccess")
-export const logoutError = createAction("auth/logoutError")
+export const logoutRequest = createAction('auth/logoutRequest');
+export const logoutSuccess = createAction('auth/logoutSuccess');
+export const logoutError = createAction('auth/logoutError');
 
-export const getCurrentUserRequest = createAction("auth/getCurrentUserRequest")
-export const getCurrentUserSuccess = createAction("auth/getCurrentUserSuccess")
-export const getCurrentUserError = createAction("auth/getCurrentUserError")
+export const getCurrentUserRequest = createAction('auth/getCurrentUserRequest');
+export const getCurrentUserSuccess = createAction('auth/getCurrentUserSuccess');
+export const getCurrentUserError = createAction('auth/getCurrentUserError');
+
+export const loginGoogleRequest = createAction('auth/loginGoogleRequest');
+export const loginGoogleSuccess = createAction('auth/loginGoogleSuccess');
+export const loginGoogleError = createAction('auth/loginGoogleError');
+
+export const googleSingIn = createAction('auth/googleSingIn');
 
 const actions = {
   registerRequest,
@@ -29,6 +35,10 @@ const actions = {
   getCurrentUserRequest,
   getCurrentUserSuccess,
   getCurrentUserError,
-}
+  googleSingIn,
+  loginGoogleRequest,
+  loginGoogleSuccess,
+  loginGoogleError,
+};
 
-export default actions
+export default actions;

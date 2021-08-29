@@ -30,7 +30,7 @@ function CardsPage() {
     const newUserCards = useSelector(state => state.cards.userCards, shallowEqual)
 
     const cards = userCards.filter(card => newUserCards.findIndex(item => item.name === card.name) === -1)
-
+     
     const [boards, setBoards] = useState([
         {id:1, title: "cards", items: [...cards]},
         {id:2, title: "registered user's cards", items: [...newUserCards]}
@@ -90,24 +90,11 @@ function CardsPage() {
                return currentBoard
             }
             return b
-         }))
+            }))
+            dispatch(add(currentItem))
       }
     }
 
-    // useEffect(() => {
-    //     setBoards(prev => {
-    //         const newItems = [...prev]
-    //         newItems[0].items = [...cards]
-    //         return newItems
-    // })
-    // }, [cards])
-
-   
-    useEffect(() => {
-        dispatch(add(currentItem))
-    }, [dispatch,currentItem])
-
-    
     return (
         <>
             <section className={`${styles.container} ${styles.cardPageContainer}`}>

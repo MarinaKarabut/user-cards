@@ -2,10 +2,11 @@
 @import '../../shared/styles/common';
 
 .header {
-  // position: fixed;
-  // z-index: 100;
+  position: fixed;
+  z-index: 100;
   width: 100%;
   box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #fd8612, #ffbc33, #f6f1d3);
 }
 
 .wrapper {

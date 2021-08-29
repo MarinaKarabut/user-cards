@@ -18,8 +18,8 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCurrentUser());
-    dispatch(getCards());
     dispatch(fetchAllTasks());
+    dispatch(getCards());
   }, [dispatch]);
 
   const { auth, cards } = routes;

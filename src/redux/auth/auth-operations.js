@@ -1,4 +1,4 @@
-import AuthService from "./auth-service"
+import AuthService from './auth-service';
 
 import {
   registerRequest,
@@ -13,46 +13,59 @@ import {
   getCurrentUserRequest,
   getCurrentUserSuccess,
   getCurrentUserError,
-} from "./auth-actions"
+  loginGoogleRequest,
+  loginGoogleSuccess,
+  loginGoogleError,
+} from './auth-actions';
 
-const authService = new AuthService()
+const authService = new AuthService();
 
-export const register = (body) => async (dispatch) => {
-  dispatch(registerRequest())
+export const register = body => async dispatch => {
+  dispatch(registerRequest());
   try {
-    const data = await authService.register(body)
-    dispatch(registerSuccess(data))
+    const data = await authService.register(body);
+    dispatch(registerSuccess(data));
   } catch (error) {
-    dispatch(registerError(error))
+    dispatch(registerError(error));
   }
-}
+};
 
-export const logIn = (body) => async (dispatch) => {
-  dispatch(loginRequest())
+export const logIn = body => async dispatch => {
+  dispatch(loginRequest());
   try {
-    const data = await authService.login(body)
-    dispatch(loginSuccess(data))
+    const data = await authService.login(body);
+    dispatch(loginSuccess(data));
   } catch (error) {
-    dispatch(loginError(error))
+    dispatch(loginError(error));
   }
-}
+};
 
-export const logOut = () => async (dispatch) => {
-  dispatch(logoutRequest())
+export const googleLogin = body => async dispatch => {
+  dispatch(loginGoogleRequest());
   try {
-    await authService.logout()
-    dispatch(logoutSuccess())
+    const data = await authService.loginGoogle(body);
+    dispatch(loginGoogleSuccess(data));
   } catch (error) {
-    dispatch(logoutError(error))
+    dispatch(loginGoogleError(error));
   }
-}
+};
 
-export const getCurrentUser = () => async (dispatch) => {
-  dispatch(getCurrentUserRequest())
+export const logOut = () => async dispatch => {
+  dispatch(logoutRequest());
   try {
-    const data = await authService.currentUser()
-    dispatch(getCurrentUserSuccess(data))
+    await authService.logout();
+    dispatch(logoutSuccess());
   } catch (error) {
-    dispatch(getCurrentUserError(error))
+    dispatch(logoutError(error));
   }
-}
+};
+
+export const getCurrentUser = () => async dispatch => {
+  dispatch(getCurrentUserRequest());
+  try {
+    const data = await authService.currentUser();
+    dispatch(getCurrentUserSuccess(data));
+  } catch (error) {
+    dispatch(getCurrentUserError(error));
+  }
+};

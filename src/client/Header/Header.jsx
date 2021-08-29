@@ -9,7 +9,10 @@ import { getIsAuthenticated } from '../../redux/auth/auth-selectors';
 
 import styles from './Header.module.scss'
 
+
 function Header() {
+    const info = useSelector(state => state.auth.user, shallowEqual)
+
     const isAuthorized = useSelector(state => getIsAuthenticated(state), shallowEqual);
 
     return (
@@ -18,7 +21,7 @@ function Header() {
                 <div>
                     <Logo />
                 </div>
-                {isAuthorized && <UserInfo />}
+                {isAuthorized && <UserInfo info={ info}/>}
             </div>        
         </header>)
 };
